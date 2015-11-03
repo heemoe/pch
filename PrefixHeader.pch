@@ -1,0 +1,39 @@
+// 常用宏
+
+#ifndef _________PrefixHeader_pch
+#define _________PrefixHeader_pch
+
+/** 日志输出 */
+#ifdef DEBUG // 开发
+#define XZLog(...) NSLog(__VA_ARGS__)
+#else // 发布
+#define XZLog(...)
+#endif
+
+#define XZLogFunc XZLog(@"%s", __func__)
+
+/** self的弱引用 */
+#define XZWeakSelf __weak typeof(self) weakSelf = self;
+
+/** 屏幕尺寸 */
+#define XZScreenW [UIScreen mainScreen].bounds.size.width
+#define XZScreenH [UIScreen mainScreen].bounds.size.height
+
+/** 颜色 */
+#define XZColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+/// 全局颜色
+#define XZGlobalBg XZColor(215, 215, 215)
+/// 随机颜色
+#define XZRandomColor XZColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
+
+
+/** 获得导航栏最大的Y值 */
+#define XZNavigationBarMaxY 64
+
+/** 字体 */
+#define XZ14TextFont [UIFont systemFontOfSize:14]
+
+/** 常见头文件 */
+
+
+#endif
