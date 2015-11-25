@@ -18,7 +18,7 @@
 /** 屏幕尺寸 */
 #define XZScreenW [UIScreen mainScreen].bounds.size.width
 #define XZScreenH [UIScreen mainScreen].bounds.size.height
-
+#define XZWindow [UIApplication sharedApplication].keyWindow
 /** 颜色 */
 #define XZColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 /// rgb颜色转换（16进制->10进制）
@@ -30,7 +30,7 @@
 /// 获取RGB颜色
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 /// 全局颜色
-#define XZGlobalBg XZColor(215, 215, 215)
+#define XZGlobalBg XZColor(229, 211, 203)
 /// 随机颜色
 #define XZRandomColor XZColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
 //清除背景色
@@ -43,9 +43,21 @@
 
 /// 判断是否iPad
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+/// not UIUserInterfaceIdiomPad
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+/// detect iPhone6 Plus based on its native scale
+#define IS_IPHONE_6PLUS (IS_IPHONE && [[UIScreen mainScreen] nativeScale] == 3.0f)
+
+#define IS_IPHONE_3_5Inche (IS_IPHONE && [UIScreen mainScreen].bounds.size.width == 320 && [UIScreen mainScreen].bounds.size.height == 480)
+#define IS_IPHONE_4_0Inche (IS_IPHONE && [UIScreen mainScreen].bounds.size.width == 320 && [UIScreen mainScreen].bounds.size.height == 568)
+#define IS_IPHONE_4_7Inche (IS_IPHONE && [UIScreen mainScreen].bounds.size.width == 375 && [UIScreen mainScreen].bounds.size.height == 667)
+#define IS_IPHONE_5_5Inche (IS_IPHONE && [UIScreen mainScreen].bounds.size.width == 414 && [UIScreen mainScreen].bounds.size.height == 736)
 
 /// 获取当前语言
 #define currentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+
+/// application sharedapplication
+#define XZApplication [UIApplication sharedApplication]
 
 //判断是真机还是模拟器
 #if TARGET_OS_IPHONE
@@ -70,8 +82,10 @@
 /// NSUserDefaults 实例化
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
 /** 常见头文件 */
-
-
+#import "UIView+DotFrame.h"
+#import "FSConst.h"
+#import "FSBaseViewController.h"
+#import "FSUser.h"
 /// 单例化一个类
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(classname) \
 \
